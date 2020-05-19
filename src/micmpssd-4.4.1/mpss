@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+### BEGIN INIT INFO
+# Provides:          mpssd
+# Required-Start:
+# Required-Stop:
+# Default-Start:     S
+# Default-Stop:	     0 6
+# Short-Description: MPSS credential / configuration daemon
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+mpssdexec=/usr/sbin/mpssd
+
+if ! [ -x ${mpssdexec} ]; then
+    exit 0
+fi
+
+case "$1" in
+    start)
+	echo -n "Starting MPSS Daemon... "
+	${mpssdexec}
+	echo "done."
+	;;
+esac
+
+exit 0
+
+
