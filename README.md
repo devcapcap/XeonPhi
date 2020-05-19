@@ -10,7 +10,7 @@ I started from the work i saw at the two links address below
  * An AKiTiO Node Thunderbolt 3   
  * A macbook air mid 2015 i7 and 8 gigs of ram  
  * An adapter Thunderbolt 3 to Thunderbolt 2 
- * Ubuntu 20.01 kernel 5.6rc1 on a extern ssd with uefi boot  
+ * Ubuntu 20.04 kernel 5.6rc1 on a extern ssd with uefi boot  
  * A xeon phi KNL pci card (7220A)  
    
    
