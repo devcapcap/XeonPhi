@@ -2,13 +2,14 @@
 xeon phi KNL modules 4.4.1, libscif 4.4.1 and micmpssd 4.4.1 for linux kernel and tested with kernel 5.6rc1 (ubuntu 20.04)  
 My test is to run a xeon phi card (KNCnKNL) on a computer with no option in bios with "4G Above Decoding".  
   
-I started from the work i saw at the link address below  
- https://egpu.io/forums/thunderbolt-enclosures/pdf-guide-and-patches-for-making-linux-v5-3-kernel-to-work-with-thunderbolt-3-add-in-card/  
+I started from the work i saw at the two links address below  
+ ->https://egpu.io/forums/thunderbolt-enclosures/pdf-guide-and-patches-for-making-linux-v5-3-kernel-to-work-with-thunderbolt-3-add-in-card/ 
+->inspired by the guy "Quant.Geek" at the link https://software.intel.com/en-us/forums/intel-many-integrated-core/topic/719921
   
 # What i use   
  * An AKiTiO Node Thunderbolt 3   
  * A macbook air mid 2015 i7 and 8 gigs of ram  
- * An adapter Thunderbolt 3 to Thunderbolt 2  
+ * An adapter Thunderbolt 3 to Thunderbolt 2 
  * Ubuntu 20.01 kernel 5.6rc1 on a extern ssd with uefi boot  
  * A xeon phi KNL pci card (7220A)  
    
