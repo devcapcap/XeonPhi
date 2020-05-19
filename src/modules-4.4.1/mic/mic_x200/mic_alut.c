@@ -16,6 +16,8 @@
 #include <linux/pci.h>
 #include <linux/moduleparam.h>
 
+#include <linux/intel-iommu.h>
+
 #include "../common/mic_dev.h"
 #include "mic_device.h"
 #include "mic_hw.h"

@@ -56,6 +56,9 @@
 
 #include "scif_rb.h"
 
+#include "../common/common.h"
+
+
 static inline u32 scif_rb_ring_cnt(u32 head, u32 tail, u32 size)
 {
 	return CIRC_CNT(head, tail, size);

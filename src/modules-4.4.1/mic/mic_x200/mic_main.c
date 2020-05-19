@@ -19,7 +19,8 @@
 #include <linux/version.h>
 #include <linux/suspend.h>
 #include <linux/iommu.h>
-#include <linux/dma_remapping.h>
+#include <linux/intel-iommu.h>
+#include "../common/dma_remapping.h"
 
 #ifdef MIC_IN_KERNEL_BUILD
 #include <linux/mic_common.h>

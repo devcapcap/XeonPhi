@@ -15,6 +15,10 @@
  */
 
 #include <linux/kthread.h>
+
+#include <linux/signal.h>
+#include <linux/sched/signal.h>
+
 #include "cosm_main.h"
 
 /*
@@ -179,7 +183,8 @@ static int cosm_send_time(struct cosm_device *cdev)
 	struct cosm_msg msg = { .id = COSM_MSG_SYNC_TIME };
 	int rc;
 
-	getnstimeofday64(&msg.timespec);
+	//getnstimeofday64(&msg.timespec);
+	ktime_get_real_ts64(&msg.timespec);
 	rc = scif_send(cdev->epd, &msg, sizeof(msg), SCIF_SEND_BLOCK);
 	if (rc < 0) {
 		log_mic_err(cdev->index, "scif_send failed rc %d", rc);

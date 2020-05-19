@@ -13,9 +13,14 @@
  *
  * Intel SCIF driver.
  */
-#include <linux/dma_remapping.h>
+#include "../common/dma_remapping.h"
 #include <linux/moduleparam.h>
 #include <linux/pagemap.h>
+
+#include <linux/sched/task.h>
+#include <linux/sched/mm.h>
+#include <linux/sched/signal.h>
+
 #include "scif_main.h"
 #include "scif_map.h"
 
@@ -119,6 +124,13 @@ finish:
 	return iova;
 }
 
+#ifndef LEGACY_IOVA
+	extern void init_iova_domain2(struct iova_domain *iovad, unsigned long granule,unsigned long start_pfn, unsigned long pfn_32bit);
+#else
+void
+	extern init_iova_domain2(struct iova_domain *iovad, unsigned long pfn_32bit);
+#endif
+
 /**
  * scif_rma_ep_init:
  * @ep: end point
@@ -131,10 +143,10 @@ void scif_rma_ep_init(struct scif_endpt *ep)
 
 	mutex_init(&rma->rma_lock);
 #ifndef LEGACY_IOVA
-	init_iova_domain(&rma->iovad, PAGE_SIZE, SCIF_IOVA_START_PFN,
-			 SCIF_DMA_64BIT_PFN);
+	init_iova_domain2(&rma->iovad, PAGE_SIZE, SCIF_IOVA_START_PFN,SCIF_DMA_64BIT_PFN);
+	// init_iova_domain(&rma->iovad, PAGE_SIZE, SCIF_IOVA_START_PFN);
 #else
-	init_iova_domain(&rma->iovad, SCIF_DMA_64BIT_PFN);
+	init_iova_domain2(&rma->iovad, SCIF_DMA_64BIT_PFN);
 #endif
 	spin_lock_init(&rma->tc_lock);
 	mutex_init(&rma->mmn_lock);
@@ -388,7 +400,12 @@ __scif_dec_pinned_vm(struct mm_struct *mm, int nr_pages)
 		return 0;
 
 	down_write(&mm->mmap_sem);
-	mm->pinned_vm -= nr_pages;
+	// mm->pinned_vm -= nr_pages;
+	#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 3))
+		atomic64_sub(nr_pages, &mm->pinned_vm);
+	#else
+		mm->pinned_vm -= nr_pages;
+	#endif
 	up_write(&mm->mmap_sem);
 	return 0;
 }
@@ -403,7 +420,12 @@ __scif_try_inc_pinned_vm(struct mm_struct *mm, int nr_pages)
 
 	down_write(&mm->mmap_sem);
 	locked = nr_pages;
-	locked += mm->pinned_vm;
+	// locked += mm->pinned_vm;
+	#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 3))
+		locked += atomic64_read(&mm->pinned_vm);
+	#else
+			locked += mm->pinned_vm;
+	#endif
 	lock_limit = rlimit(RLIMIT_MEMLOCK) >> PAGE_SHIFT;
 	if ((locked > lock_limit) && !capable(CAP_IPC_LOCK)) {
 		up_write(&mm->mmap_sem);
@@ -413,7 +435,12 @@ __scif_try_inc_pinned_vm(struct mm_struct *mm, int nr_pages)
 			locked, lock_limit);
 		return -EAGAIN;
 	}
-	mm->pinned_vm = locked;
+	// mm->pinned_vm = locked;
+	#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 3))
+		atomic64_set(&mm->pinned_vm, locked);
+	#else
+		mm->pinned_vm = locked;
+	#endif
 	up_write(&mm->mmap_sem);
 	return 0;
 }

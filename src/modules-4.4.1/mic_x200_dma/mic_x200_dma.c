@@ -62,6 +62,7 @@
 
 #include "dmaengine.h"
 #include "../mic/common/mic_dev.h"
+// #include "mic/common/common.h"
 
 /* TBD Remove for upstream */
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 13, 0))

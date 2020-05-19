@@ -78,6 +78,8 @@
 
 #include "../common/mic_dev.h"
 
+// #include "../common/common.h"
+
 #define SCIF_MGMT_NODE 0
 #define SCIF_DEFAULT_WATCHDOG_TO 10
 #define SCIF_NODE_ACCEPT_TIMEOUT (3 * HZ)

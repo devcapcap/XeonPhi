@@ -168,7 +168,8 @@ vop_register_device(struct device *pdev, int id,
 	vdev->dev.parent = pdev;
 	vdev->id.device = id;
 	vdev->id.vendor = VOP_DEV_ANY_ID;
-	vdev->dev.archdata.dma_ops = dma_ops;
+	// vdev->dev.archdata.dma_ops = dma_ops;
+	vdev->dev.dma_ops = dma_ops;
 	vdev->dev.dma_mask = &vdev->dev.coherent_dma_mask;
 	dma_set_mask(&vdev->dev, *pdev->dma_mask);
 	vdev->dev.release = vop_release_dev;

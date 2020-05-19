@@ -50,6 +50,9 @@
  * Intel SCIF driver.
  */
 #include <linux/pagemap.h>
+
+#include <linux/sched/signal.h>
+
 #ifdef MIC_IN_KERNEL_BUILD
 #include <linux/scif.h>
 #else
@@ -225,8 +228,7 @@ int scif_close(scif_epd_t epd)
 
 	switch (oldstate) {
 	case SCIFEP_ZOMBIE:
-		dev_err(scif_info.mdev.this_device,
-			"SCIFAPI close: zombie state unexpected\n");
+		dev_err(scif_info.mdev.this_device,"SCIFAPI close: zombie state unexpected\n");
 	case SCIFEP_DISCONNECTED:
 		scif_unregister_all_windows(epd);
 		/* Remove from the disconnected list */

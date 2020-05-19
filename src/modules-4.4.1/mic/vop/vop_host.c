@@ -236,8 +236,13 @@ static int vop_virtio_add_device(struct vop_vdev *vdev,
 		vr_size = PAGE_ALIGN(vring_size(num, MIC_VIRTIO_RING_ALIGN) +
 			sizeof(struct _mic_vring_info));
 
-		vr->va = dma_zalloc_coherent(dma_dev, vr_size, &vr_addr,
-					     GFP_KERNEL);
+		// vr->va = dma_zalloc_coherent(dma_dev, vr_size, &vr_addr,GFP_KERNEL);
+		#if( LINUX_VERSION_CODE >= KERNEL_VERSION(5,0,0))
+			#ifndef dma_zalloc_coherent
+				#define dma_zalloc_coherent(d,s,h,f) dma_alloc_coherent(d,s,h,f)
+			#endif
+		#endif
+		vr->va = dma_zalloc_coherent(dma_dev, vr_size, &vr_addr,GFP_KERNEL);
 		if (!vr->va) {
 			ret = -ENOMEM;
 			log_mic_err(vop_get_id(vdev->vpdev),

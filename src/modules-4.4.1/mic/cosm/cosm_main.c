@@ -21,6 +21,7 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 #include <linux/version.h>
+#include <linux/intel-iommu.h>
 #include "cosm_main.h"
 
 static const char cosm_driver_name[] = "mic";

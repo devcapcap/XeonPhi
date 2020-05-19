@@ -17,9 +17,12 @@
 #define __MIC_DEV_H__
 
 #include <linux/types.h>
-#include <linux/dma_remapping.h>
+#include "../common/dma_remapping.h"
 #include <linux/dma-mapping.h>
 #include <linux/version.h>
+
+
+#define ACCESS_ONCE(x) (*(volatile typeof(x)*)&(x))
 
 /* The maximum number of MIC devices supported in a single host system. */
 #define MIC_MAX_NUM_DEVS 128
