@@ -1,6 +1,6 @@
 # XeonPhi  
 xeon phi KNL modules 4.4.1, libscif 4.4.1 and micmpssd 4.4.1 for linux kernel and tested with kernel 5.6rc1 (ubuntu 20.04)  
-My test is to run a xeon phi card (KNCnKNL) on a computer with no option in bios with "4G Above Decoding".  
+My test is to run a xeon phi card (KNC and KNL) on a computer with no option in bios with "4G Above Decoding".  
   
 I started from the work i saw at the two links address below  
  ->https://egpu.io/forums/thunderbolt-enclosures/pdf-guide-and-patches-for-making-linux-v5-3-kernel-to-work-with-thunderbolt-3-add-in-card/ 
@@ -48,6 +48,8 @@ I started from the work i saw at the two links address below
  mpssdaemon(mpssdaemon 3.8.6 works but it's not for this card as i understand)  
   
 * I can verify mic card statut with "micctrl" (micctrl -s") and i can shutdown too (micctrl --shutdown)  
+
+* I can start mpssdaemon service with (systemctl start mpss.service") and i can stop too  
   
 * I can see some information of the card with the program "micinfo" (sudo micinfo)  
    micinfo Utility Log  
@@ -113,10 +115,10 @@ I started from the work i saw at the two links address below
        Technology                     : Not Available  
        Speed                          : Not Available  
        Frequency                      : Not Available  
+   
   
-*  The last step is to resolve the mpssdaemon program and boot the card (with micctrl i have the status "mic :ready to boot"  
-  
-  
+* The last missing step is booting the card os.
+
 Anothers failed tests  
 * I try to port the code of mpss-module 3.8.6 and use a 7210A/3120A xeon phi card but the system is freezing (bad pointer deference -->xxxflush fonction failed from vhost_dev_init).  
 * With the port of the version of 3.6.1, i have the same resultat above with the 7220A but the system is freezing too (bad pointer deference-->xxxflush fonction failed vhost_dev_init)  
