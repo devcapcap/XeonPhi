@@ -1,5 +1,5 @@
 # XeonPhi  
-xeon phi KNL modules 4.4.1, libscif 4.4.1 and micmpssd 4.4.1 for linux kernel and tested with kernel 5.6rc1 (ubuntu 20.04)  
+Xeon phi KNL modules 4.4.1, libscif 4.4.1 and micmpssd 4.4.1 for linux kernel and tested with kernel 5.6rc1 (ubuntu 20.04)  
 My test is to run a xeon phi card (KNC and KNL) on a computer with no option in bios with "4G Above Decoding".  
   
 I started from the work i saw at the two links address below  
@@ -40,7 +40,7 @@ I started from the work i saw at the two links address below
     Capabilities: [b70] Vendor Specific Information: ID=0001 Rev=0 Len=010 <?>  
     Kernel driver in use: mic_x200  
       
-  For information without the grub command line parameters, i have this    
+* For information without the grub command line parameters, i have this    
    Region 0: Memory at c1700000 (32-bit, non-prefetchable) [disabled] [size=256K]   
    Region 2: Memory at <unassigned> (64-bit,    prefetchable) [disabled]  
   
