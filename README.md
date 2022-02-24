@@ -4,7 +4,8 @@ My test is to run a xeon phi card (KNC and KNL) on a computer with no option in 
   
 I started from the work i saw at the two links address below  
  ->https://egpu.io/forums/thunderbolt-enclosures/pdf-guide-and-patches-for-making-linux-v5-3-kernel-to-work-with-thunderbolt-3-add-in-card/ 
-->inspired by the guy "Quant.Geek" at the link https://software.intel.com/en-us/forums/intel-many-integrated-core/topic/719921
+ ->inspired by the guy "Quant.Geek" at the link https://software.intel.com/en-us/forums/intel-many-integrated-core/topic/719921
+ ->my post on intel forum : https://community.intel.com/t5/Server-Products/Intel-Xeon-Phi-Coprocessor-with-eGPU-over-Thunderbolt-3/td-p/1271859
   
 # What i use   
  * An AKiTiO Node Thunderbolt 3   
@@ -12,7 +13,7 @@ I started from the work i saw at the two links address below
  * An adapter Thunderbolt 3 to Thunderbolt 2 
  * Ubuntu 20.04 kernel 5.6rc1 on a extern ssd with uefi boot  
  * A xeon phi KNL pci card (7220A)  
-   
+ * You can see differents images from my post on intel forum with a test on chuwi box pro but i have to made some change in futur because the card is not seeing from a Thunderbolt port.  
    
 # My setting on ubuntu  
  * In /etc/default/grub file : GRUB_CMDLINE_LINUX="hpbussize=0x33,realloc,hpmemsize=2M,hpmmioprefsize=64G,nocrs pcie_ports=native"  
