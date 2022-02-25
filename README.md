@@ -12,7 +12,8 @@ I started from the work i saw at the two links address below
  * A macbook air mid 2015 i7 and 8 gigs of ram  
  * An adapter Thunderbolt 3 to Thunderbolt 2 
  * Ubuntu 20.04 kernel 5.6rc1 on a extern ssd with uefi boot  
- * A xeon phi KNL pci card (7220A)  
+ * A xeon phi KNL pci card 7220A , 7210A and 3120A 
+ * Modified source code of MPSS 3.8.6 (no pushed here), MPSS 3.6.1(no pushed here) and MPSS 4.4.1
  * You can see differents images from my post on intel forum with a test on chuwi box pro but i have to made some change in futur because the card is not seeing from a Thunderbolt port.  
    
 # My setting on ubuntu  
